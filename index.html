@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OTP Auto-fill</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 100px;
+        }
+        input {
+            font-size: 1.2em;
+            padding: 10px;
+            width: 200px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Hello Shahar, Welcome!</h1>
+    <p>Please enter the OTP code sent to your mobile:</p>
+    <input type="text" id="otpInput" placeholder="Enter OTP" maxlength="6" />
+
+    <script>
+        if ('OTPCredential' in window) {
+            const input = document.getElementById('otpInput');
+
+            window.addEventListener('DOMContentLoaded', () => {
+                navigator.credentials.get({ otp: { transport: ['sms'] } })
+                    .then(otp => {
+                        input.value = otp.code;
+                    })
+                    .catch(err => {
+                        console.error('Error in receiving OTP', err);
+                    });
+            });
+        } else {
+            console.log('WebOTP API is not supported in this browser.');
+        }
+    </script>
+</body>
+</html>
