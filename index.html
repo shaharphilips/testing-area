@@ -27,16 +27,21 @@
         if ('OTPCredential' in window) {
             const input = document.getElementById('otpInput');
 
-            window.addEventListener('DOMContentLoaded', () => {
+            window.addEventListener('DOMContentLoaded', () => {                
                 navigator.credentials.get({ otp: { transport: ['sms'] } })
+                    alert('navigator.credentials');
                     .then(otp => {
+                        alert('OTP');
                         input.value = otp.code;
                     })
                     .catch(err => {
+                        alert('Error in receiving OTP');
                         console.error('Error in receiving OTP', err);
                     });
             });
         } else {
+                                    alert('WebOTP API is not supported in this browser');
+
             console.log('WebOTP API is not supported in this browser.');
         }
     </script>
