@@ -1,49 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OTP Auto-fill</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            margin-top: 100px;
-        }
-        input {
-            font-size: 1.2em;
-            padding: 10px;
-            width: 200px;
-            margin-top: 20px;
-        }
-    </style>
-</head>
-<body>
-    <h1>Hello Shahar, Welcome!</h1>
-    <p>Please enter the OTP code sent to your mobile:</p>
-    <input type="text" id="otpInput" placeholder="Enter OTP" maxlength="6" />
-
-    <script>
-        if ('OTPCredential' in window) {
-            const input = document.getElementById('otpInput');
-
-            window.addEventListener('DOMContentLoaded', () => {                
-                navigator.credentials.get({ otp: { transport: ['sms'] } })
-                    alert('navigator.credentials');
-                    .then(otp => {
-                        alert('OTP');
-                        input.value = otp.code;
-                    })
-                    .catch(err => {
-                        alert('Error in receiving OTP');
-                        console.error('Error in receiving OTP', err);
-                    });
-            });
-        } else {
-                                    alert('WebOTP API is not supported in this browser');
-
-            console.log('WebOTP API is not supported in this browser.');
-        }
-    </script>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vite App</title>
+  </head>
+  <body style="display: flex; flex-direction: column; gap: 1rem">
+    <input
+      data-email
+      type="email"
+      placeholder="Email"
+      style="margin-bottom: 1rem; font-size: 3rem"
+    />
+    <button data-signup style="font-size: 4rem">Sign Up</button>
+    <button data-login style="font-size: 4rem">Log In</button>
+    <dialog data-modal style="font-size: 3rem">
+      <button
+        data-close
+        style="font-size: 2rem; position: absolute; top: 0; right: 0"
+      >
+        &times;
+      </button>
+      <div data-content></div>
+    </dialog>
+    <script type="module" src="./main.js"></script>
+  </body>
 </html>
